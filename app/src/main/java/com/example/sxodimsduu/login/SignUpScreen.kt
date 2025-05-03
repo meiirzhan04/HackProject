@@ -4,6 +4,9 @@ package com.example.sxodimsduu.login
 
 import android.R.attr.tag
 import androidx.compose.foundation.Image
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -46,6 +49,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sxodimsduu.R
 import java.nio.file.WatchEvent
+import android.util.Log
 
 @Composable
 fun SignUpScreen(
@@ -56,21 +60,49 @@ fun SignUpScreen(
     var password by remember { mutableStateOf("") }
     var isPasswordVisible by remember { mutableStateOf(false) }
     var isClicked by remember { mutableStateOf(false) }
-    val onSignInClicked: () -> Unit = {
-        navController.navigate("loginscreen")
-    }
-    val annotatedTextSignIn = buildAnnotatedString {
-        append("Already have an account? ")
-        pushStringAnnotation(tag = "SignIn", annotation = "SignIn")
-        withStyle(
-            style = SpanStyle(
-                color = Color(0xFF_FE8C00),
-                fontWeight = FontWeight.SemiBold,
-            )
-        ) {
-            append("Sign In")
-        }
+    var isLoading by remember { mutableStateOf(false) }  // Для отображения состояния загрузки
 
+    // Функция для обработки регистрации
+    val onSignUpClicked = {
+        Log.d("SignUp", "Sign Up button clicked")
+
+        // Проверяем, чтобы данные были заполнены
+        if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
+            isLoading = true
+
+            val newUser = User(
+                sdu_email = email,
+                password = password,
+                name = name
+            )
+
+            // Отправляем запрос на сервер с использованием Retrofit
+            RetrofitInstance.api.signUp(newUser).enqueue(object : Callback<User> {
+
+
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    isLoading = false
+                    if (response.isSuccessful) {
+                        Log.d("SignUp", "Data validated, sending request...")
+                        // Успешная регистрация
+                        println("Succesfull login!") // Переводим на экран логина
+                    } else {
+                        // Обработка ошибок, например, неверный email или пароль
+                        println("Error: ${response.message()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<User>, t: Throwable) {
+                    isLoading = false
+                    // Ошибка соединения или другие проблемы
+                    println("Failure: ${t.message}")
+                }
+            })
+        } else {
+            Log.d("SignUp", "Please fill in all fields")
+            // Показать сообщение о том, что поля должны быть заполнены
+            println("Please fill in all fields")
+        }
     }
 
     Column(
@@ -78,7 +110,7 @@ fun SignUpScreen(
             .fillMaxSize()
             .background(Color(0xFF_1F1D2B))
             .padding(horizontal = 24.dp),
-        horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
             text = "Sign Up",
@@ -108,9 +140,7 @@ fun SignUpScreen(
         Spacer(modifier = Modifier.height(72.dp))
         OutlinedTextField(
             value = name,
-            onValueChange = {
-                name = it
-            },
+            onValueChange = { name = it },
             textStyle = TextStyle(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.W400,
@@ -135,9 +165,7 @@ fun SignUpScreen(
         Spacer(modifier = Modifier.height(24.dp))
         OutlinedTextField(
             value = email,
-            onValueChange = {
-                email = it
-            },
+            onValueChange = { email = it },
             textStyle = TextStyle(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.W400,
@@ -162,9 +190,7 @@ fun SignUpScreen(
         Spacer(modifier = Modifier.height(24.dp))
         OutlinedTextField(
             value = password,
-            onValueChange = {
-                password = it
-            },
+            onValueChange = { password = it },
             textStyle = TextStyle(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.W400,
@@ -197,9 +223,7 @@ fun SignUpScreen(
                             }
                         ),
                     tint = Color(0xFF_92929D)
-
                 )
-
             }
         )
         Spacer(modifier = Modifier.height(24.dp))
@@ -210,7 +234,7 @@ fun SignUpScreen(
         Spacer(modifier = Modifier.height(40.dp))
         CustomButton(
             text = "Sign Up",
-            onClick = {}
+            onClick = onSignUpClicked
         )
     }
 }
