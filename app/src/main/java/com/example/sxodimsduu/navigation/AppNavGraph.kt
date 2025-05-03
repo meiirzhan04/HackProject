@@ -10,6 +10,7 @@ import com.example.sxodimsduu.login.LoginScreen
 import com.example.sxodimsduu.login.SignUp
 import com.example.sxodimsduu.login.SignUpScreen
 import com.example.sxodimsduu.mainScreen.MainScreen
+import com.example.sxodimsduu.mainscreens.SearchScreen
 import com.example.sxodimsduu.onboarding.OnboardingScreen
 import com.example.sxodimsduu.ui.theme.SplashScreen
 import com.example.sxodimsduu.viewmodel.OnboardingPreferences
@@ -42,6 +43,10 @@ fun NavGraph(
                 navController = navController,
             )
         }
+        addMainScreens(
+            navController
+        )
+
         composable<Screen.SignUpScreen> {
             SignUpScreen(
                 navController = navController,
@@ -52,9 +57,6 @@ fun NavGraph(
                 navController = navController,
             )
         }
-        composable<Screen.MainScreen> {
-            MainScreen(
-            )
-        }
+
     }
 }

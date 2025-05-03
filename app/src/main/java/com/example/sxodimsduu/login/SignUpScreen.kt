@@ -190,7 +190,7 @@ fun SignUpScreen(
         CustomButton(
             text = "Sign Up",
             onClick = {
-                navController.navigate(Screen.MainScreen)
+                navController.navigate(Screen.HomeScreen)
             }
         )
     }
