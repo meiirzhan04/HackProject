@@ -1,25 +1,20 @@
 package com.example.sxodimsduu.login
 
-import android.R.attr.navigationIcon
-import android.R.attr.text
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.OutlinedTextFieldDefaults.contentPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -33,20 +28,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.sxodimsduu.R
-import com.example.sxodimsduu.R.drawable
-import com.example.sxodimsduu.R.drawable.*
+import androidx.navigation.NavController
+import com.example.sxodimsduu.R.drawable.ic_back
+import com.example.sxodimsduu.R.drawable.ic_eye_close
+import com.example.sxodimsduu.R.drawable.ic_eye_open
+import com.example.sxodimsduu.R.drawable.ic_eye_off
+import com.example.sxodimsduu.R.drawable.ic_eye_open
+import com.example.sxodimsduu.login.CustomButton
 
-@Preview
-@ExperimentalMaterial3Api
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var isClicked by remember { mutableStateOf(false) }
 
     Scaffold(
         modifier = Modifier
@@ -66,7 +66,15 @@ fun LoginScreen() {
                     containerColor = Color(0xFF1F1D2B)
                 ),
                 navigationIcon = {
-                    Image(painter = painterResource(id = ic_back), contentDescription = null)
+                    Image(
+                        painter = painterResource(id = ic_back),
+                        contentDescription = null,
+                        modifier = Modifier.clickable(
+                            onClick = {
+
+                            }
+                        )
+                    )
                 },
                 modifier = Modifier.padding(horizontal = 24.dp)
             )
@@ -100,28 +108,52 @@ fun LoginScreen() {
                 modifier = Modifier.fillMaxWidth(),
                 value = email,
                 onValueChange = { email = it },
-                label = { Text(text = "Email Address") },
                 shape = RoundedCornerShape(24.dp),
                 colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = Color(0xFF252836),
-                    focusedTextColor = Color(0xFF92929D),
-                    unfocusedTextColor = Color(0xFF92929D)
-                )
+                    focusedBorderColor = Color(0xFF_252836),
+                    unfocusedBorderColor = Color(0xFF_252836),
+                    focusedTextColor = Color(0xFF_92929D),
+                    unfocusedTextColor = Color(0xFF_92929D),
+                    focusedLabelColor = Color(0xFF_EBEBEF)
+                ),
+                placeholder = {
+                    Text(
+                        text = "Email Address",
+                        color = Color(0xFF_92929D)
+                    )
+                }
             )
             Spacer(modifier = Modifier.height(32.dp))
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = password,
                 onValueChange = { password = it },
-                label = { Text(text = "Password") },
+                placeholder = {
+                    Text(
+                        text = "Password",
+                        color = Color(0xFF_92929D)
+                    )
+                },
                 shape = RoundedCornerShape(24.dp),
                 colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = Color(0xFF252836),
-                    focusedTextColor = Color(0xFF92929D),
-                    unfocusedTextColor = Color(0xFF92929D)
+                    focusedBorderColor = Color(0xFF_252836),
+                    unfocusedBorderColor = Color(0xFF_252836),
+                    focusedTextColor = Color(0xFF_92929D),
+                    unfocusedTextColor = Color(0xFF_92929D),
+                    focusedLabelColor = Color(0xFF_EBEBEF)
                 ),
+                visualTransformation = if (!isClicked) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
-                    Icon(painter = painterResource(id = ic_eye_off), contentDescription = null)
+                    Icon(
+                        painter = painterResource(id = if(isClicked) ic_eye_close else ic_eye_open),
+                        contentDescription = null,
+                        modifier = Modifier.clickable(
+                            onClick = {
+                                isClicked = !isClicked
+                            }
+                        ),
+                        tint = Color(0xFF_92929D)
+                    )
                 }
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -130,7 +162,13 @@ fun LoginScreen() {
                 fontSize = 12.sp,
                 color = Color(0xFF12CDD9),
                 fontWeight = FontWeight.Medium,
-                modifier = Modifier.align(Alignment.End)
+                modifier = Modifier
+                    .align(Alignment.End)
+                    .clickable(
+                        onClick = {
+
+                        }
+                    )
             )
             Spacer(modifier = Modifier.height(40.dp))
             CustomButton(text = "Login")
