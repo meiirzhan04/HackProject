@@ -1,29 +1,84 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.sxodimsduu.login
 
+import android.R.attr.tag
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.sxodimsduu.R
+import java.nio.file.WatchEvent
 
 @Composable
-fun SignUpScreen() {
+fun SignUpScreen(
+    navController: NavController
+) {
+    var name by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var isPasswordVisible by remember { mutableStateOf(false) }
+    var isClicked by remember { mutableStateOf(false) }
+    val onSignInClicked: () -> Unit = {
+        navController.navigate("loginscreen")
+    }
+    val annotatedTextSignIn = buildAnnotatedString {
+        append("Already have an account? ")
+        pushStringAnnotation(tag = "SignIn", annotation = "SignIn")
+        withStyle(
+            style = SpanStyle(
+                color = Color(0xFF_FE8C00),
+                fontWeight = FontWeight.SemiBold,
+            )
+        ) {
+            append("Sign In")
+        }
+
+    }
+
     Column(
-        modifier = Modifier.fillMaxSize().background(Color(0xFF_1F1D2B)),
-        horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF_1F1D2B))
+            .padding(horizontal = 24.dp),
+        horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
     ) {
         Text(
             text = "Sign Up",
@@ -52,11 +107,21 @@ fun SignUpScreen() {
         )
         Spacer(modifier = Modifier.height(72.dp))
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = name,
+            onValueChange = {
+                name = it
+            },
+            textStyle = TextStyle(
+                fontSize = 14.sp,
+                fontWeight = FontWeight.W400,
+                color = Color(0xFF_92929D)
+            ),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Color.White,
+                unfocusedBorderColor = Color(0xFF_252836),
+            ),
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 24.dp),
+                .fillMaxWidth(),
             placeholder = {
                 Text(
                     text = "Full Name",
@@ -67,5 +132,170 @@ fun SignUpScreen() {
             },
             shape = RoundedCornerShape(24.dp),
         )
+        Spacer(modifier = Modifier.height(24.dp))
+        OutlinedTextField(
+            value = email,
+            onValueChange = {
+                email = it
+            },
+            textStyle = TextStyle(
+                fontSize = 14.sp,
+                fontWeight = FontWeight.W400,
+                color = Color(0xFF_92929D)
+            ),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Color.White,
+                unfocusedBorderColor = Color(0xFF_252836),
+            ),
+            modifier = Modifier
+                .fillMaxWidth(),
+            placeholder = {
+                Text(
+                    text = "Email Address",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.W400,
+                    color = Color(0xFF_EBEBEF)
+                )
+            },
+            shape = RoundedCornerShape(24.dp),
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+        OutlinedTextField(
+            value = password,
+            onValueChange = {
+                password = it
+            },
+            textStyle = TextStyle(
+                fontSize = 14.sp,
+                fontWeight = FontWeight.W400,
+                color = Color(0xFF_92929D)
+            ),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Color.White,
+                unfocusedBorderColor = Color(0xFF_252836),
+            ),
+            modifier = Modifier
+                .fillMaxWidth(),
+            placeholder = {
+                Text(
+                    text = "Password",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.W400,
+                    color = Color(0xFF_EBEBEF)
+                )
+            },
+            visualTransformation = if (!isClicked) VisualTransformation.None else PasswordVisualTransformation(),
+            shape = RoundedCornerShape(24.dp),
+            trailingIcon = {
+                Icon(
+                    painter = painterResource(id = if (isClicked) R.drawable.ic_eye_open else R.drawable.ic_eye_close),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .clickable(
+                            onClick = {
+                                isClicked = !isClicked
+                            }
+                        ),
+                    tint = Color(0xFF_92929D)
+
+                )
+
+            }
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+        TermsOfServiceAgreementRow(
+            modifier = Modifier
+                .fillMaxWidth(),
+        )
+        Spacer(modifier = Modifier.height(40.dp))
+        CustomButton(
+            text = "Sign Up",
+            onClick = {}
+        )
     }
+}
+
+
+@Composable
+fun TermsOfServiceAgreementRow(
+    modifier: Modifier = Modifier,
+    onTermsClicked: () -> Unit = {},
+    onPrivacyClicked: () -> Unit = {}
+) {
+    var isCheck = remember { mutableStateOf(false) }
+    val orangeColor = Color(0xFF_12CDD9)
+    val annotatedText = buildAnnotatedString {
+        withStyle(
+            style = SpanStyle(
+                color = Color(0xFF_92929D),
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 12.sp,
+            )
+        ) {
+            append("I Agree with ")
+        }
+        pushStringAnnotation(tag = "TOS", annotation = "TermsOfService")
+        withStyle(
+            style = SpanStyle(
+                color = orangeColor,
+                fontWeight = FontWeight.W500,
+                fontSize = 12.sp,
+
+            )
+        ) {
+            append("Terms and Services")
+        }
+        pushStringAnnotation(tag = "TOS", annotation = "Terms and Services")
+        withStyle(
+            style = SpanStyle(
+                color = Color(0xFF_92929D),
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 12.sp,
+            )
+        ) {
+            append(" \nand ")
+        }
+        pushStringAnnotation(tag = "Privacy", annotation = "PrivacyPolicy")
+        withStyle(
+            style = SpanStyle(
+                color = orangeColor,
+                fontWeight = FontWeight.SemiBold,
+            )
+        ) {
+            append("Privacy Policy")
+        }
+    }
+
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Start
+    ) {
+        Checkbox(
+            checked = isCheck.value,
+            onCheckedChange = { isCheck.value = it },
+            colors = CheckboxDefaults.colors(
+                checkedColor = Color(0xFF_92929D),
+                uncheckedColor = Color(0xFF_92929D)
+            ),
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        @Suppress("DEPRECATION")
+        ClickableText(
+            text = annotatedText,
+            onClick = { offset ->
+                annotatedText.getStringAnnotations(
+                    start = offset,
+                    end = offset
+                )
+                    .firstOrNull()?.let { annotation ->
+                        when (annotation.tag) {
+                            "TOS" -> onTermsClicked()
+                            "Privacy" -> onPrivacyClicked()
+                        }
+                    }
+            }
+        )
+    }
+
 }

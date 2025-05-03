@@ -1,6 +1,7 @@
 package com.example.sxodimsduu.login
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -8,17 +9,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun CustomButton(
-    text: String ,
-    backgroundColor: Color = Color(0xFF_12CDD9)
+    text: String,
+    backgroundColor: Color = Color(0xFF12CDD9),
+    onClick: () -> Unit = {}
 ) {
     Button(
-        onClick = {
-
-        } ,
-        modifier = Modifier.fillMaxWidth() ,
+        onClick = onClick,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(56.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = backgroundColor,
             contentColor = Color.White
@@ -26,6 +30,7 @@ fun CustomButton(
     ) {
         Text(
             text = text,
+            fontSize = 16.sp,
             fontWeight = FontWeight.Medium
         )
     }

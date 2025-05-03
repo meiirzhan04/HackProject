@@ -51,7 +51,7 @@ fun LoginScreen() {
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color(0xFF_1F1D2B)),
+            .background(color = Color(0xFF1F1D2B)),
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
@@ -63,7 +63,7 @@ fun LoginScreen() {
                     )
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = Color(0xFF_1F1D2B)
+                    containerColor = Color(0xFF1F1D2B)
                 ),
                 navigationIcon = {
                     Image(painter = painterResource(id = ic_back), contentDescription = null)
@@ -71,13 +71,13 @@ fun LoginScreen() {
                 modifier = Modifier.padding(horizontal = 24.dp)
             )
         }
-    ) { contentPadding->
+    ) { contentPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = Color(0xFF_1F1D2B))
+                .background(color = Color(0xFF1F1D2B))
                 .padding(horizontal = 24.dp)
-                .padding(paddingValues = contentPadding) ,
+                .padding(paddingValues = contentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(40.dp))
@@ -98,35 +98,27 @@ fun LoginScreen() {
             Spacer(modifier = Modifier.height(64.dp))
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = email ,
-                onValueChange = {
-                    email = it
-                } ,
-                label = {
-                    Text(text = "Email Address")
-                } ,
+                value = email,
+                onValueChange = { email = it },
+                label = { Text(text = "Email Address") },
                 shape = RoundedCornerShape(24.dp),
                 colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = Color(0xFF_252836),
-                    focusedTextColor = Color(0xFF_92929D),
-                    unfocusedTextColor = Color(0xFF_92929D)
+                    unfocusedBorderColor = Color(0xFF252836),
+                    focusedTextColor = Color(0xFF92929D),
+                    unfocusedTextColor = Color(0xFF92929D)
                 )
             )
             Spacer(modifier = Modifier.height(32.dp))
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = password ,
-                onValueChange = {
-                    password = it
-                } ,
-                label = {
-                    Text(text = "Password")
-                } ,
+                value = password,
+                onValueChange = { password = it },
+                label = { Text(text = "Password") },
                 shape = RoundedCornerShape(24.dp),
                 colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = Color(0xFF_252836),
-                    focusedTextColor = Color(0xFF_92929D),
-                    unfocusedTextColor = Color(0xFF_92929D)
+                    unfocusedBorderColor = Color(0xFF252836),
+                    focusedTextColor = Color(0xFF92929D),
+                    unfocusedTextColor = Color(0xFF92929D)
                 ),
                 trailingIcon = {
                     Icon(painter = painterResource(id = ic_eye_off), contentDescription = null)
@@ -136,15 +128,12 @@ fun LoginScreen() {
             Text(
                 text = "Forgot Password?",
                 fontSize = 12.sp,
-                color = Color(0xFF_12CDD9),
+                color = Color(0xFF12CDD9),
                 fontWeight = FontWeight.Medium,
-                modifier = Modifier
-                    .align(Alignment.End)
+                modifier = Modifier.align(Alignment.End)
             )
             Spacer(modifier = Modifier.height(40.dp))
-            CustomButton(
-                text = "Login"
-            )
+            CustomButton(text = "Login")
         }
     }
 }
