@@ -2,6 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("kotlin-parcelize")
+    id("kotlin-kapt")
+    id("kotlin-android")
+    kotlin("kapt")
 }
 
 android {
@@ -40,6 +44,16 @@ android {
 }
 
 dependencies {
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation ("com.google.accompanist:accompanist-pager:0.33.2-alpha")
+    implementation ("com.google.accompanist:accompanist-pager-indicators:0.33.2-alpha")
+    implementation( "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
+    implementation("androidx.compose.runtime:runtime-livedata:1.7.8")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    implementation ("androidx.datastore:datastore-preferences:1.1.4")
+    implementation ("androidx.compose.ui:ui:1.7.8")
+    implementation ("com.google.code.gson:gson:2.10.1")
+    implementation("androidx.navigation:navigation-compose:2.8.9")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
