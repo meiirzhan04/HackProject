@@ -55,7 +55,7 @@ fun SignUp() {
         )
         Spacer(modifier = Modifier.height(64.dp))
         CustomButton(
-            text = "Sign Up"
+            text = "Sign Up",
         )
         Row {
            Text(

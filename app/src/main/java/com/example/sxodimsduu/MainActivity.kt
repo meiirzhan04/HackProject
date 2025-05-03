@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.example.sxodimsduu.login.ResetPasswordScreen
 import com.example.sxodimsduu.login.SignUpScreen
 import com.example.sxodimsduu.onboarding.OnboardingScreen
 import com.example.sxodimsduu.ui.theme.SxodimSduuTheme
@@ -21,7 +22,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            SignUpScreen()
+            ResetPasswordScreen(
+                navController = rememberNavController()
+            )
         }
     }
 }
