@@ -2,6 +2,7 @@
 <project version="4">
   <component name="deploymentTargetSelector">
     <selectionStates>
+<<<<<<< HEAD
       <SelectionState runConfigName="SxodimSduu.app">
         <option name="selectionMode" value="DROPDOWN" />
         <DropdownSelection timestamp="2025-05-03T16:46:39.103998400Z">
@@ -26,6 +27,9 @@
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="ClubSelectionScreen">
+=======
+      <SelectionState runConfigName="app">
+>>>>>>> d624eeac92db2803a5a6f040bad1f6e9c836d6e9
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

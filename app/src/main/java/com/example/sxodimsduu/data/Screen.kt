@@ -12,10 +12,15 @@ sealed interface Screen {
     @Serializable
     object SignUpScreen : Screen
     @Serializable
-    object HomeScreen : Screen
+    object SearchScreen : Screen
     @Serializable
     object SignUpMain : Screen
     @Serializable
     object MainScreen : Screen
-
+    @Serializable
+    object ProfileScreen : Screen
+    @Serializable
+    object FavoriteScreen : Screen
+    @Serializable
+    object HomeScreen : Screen
 }
