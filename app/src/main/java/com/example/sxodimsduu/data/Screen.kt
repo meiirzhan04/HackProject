@@ -15,4 +15,7 @@ sealed interface Screen {
     object HomeScreen : Screen
     @Serializable
     object SignUpMain : Screen
+    @Serializable
+    object MainScreen : Screen
+
 }

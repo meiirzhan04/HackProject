@@ -54,7 +54,7 @@ fun SignUp(navController: NavHostController) {
         CustomButton(
             text = "Sign Up",
             onClick = {
-                navController.navigate(Screen.LoginScreen)
+                navController.navigate(Screen.SignUpScreen)
             }
         )
         Spacer(modifier = Modifier.height(32.dp))

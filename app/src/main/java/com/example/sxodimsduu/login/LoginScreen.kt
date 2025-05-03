@@ -2,6 +2,7 @@ package com.example.sxodimsduu.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,7 +35,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sxodimsduu.R.drawable.ic_back
-import com.example.sxodimsduu.R.drawable.ic_eye_off
+import com.example.sxodimsduu.R.drawable.ic_eye_close
+import com.example.sxodimsduu.R.drawable.ic_eye_open
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -110,13 +112,25 @@ fun LoginScreen(navController: NavController) {
                     focusedTextColor = Color(0xFF_92929D),
                     unfocusedTextColor = Color(0xFF_92929D),
                     focusedLabelColor = Color(0xFF_EBEBEF)
-                )
+                ),
+                placeholder = {
+                    Text(
+                        text = "Email Address",
+                        color = Color(0xFF_92929D)
+                    )
+                }
             )
             Spacer(modifier = Modifier.height(32.dp))
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = password,
                 onValueChange = { password = it },
+                placeholder = {
+                    Text(
+                        text = "Password",
+                        color = Color(0xFF_92929D)
+                    )
+                },
                 shape = RoundedCornerShape(24.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = Color(0xFF_252836),
@@ -128,7 +142,7 @@ fun LoginScreen(navController: NavController) {
                 visualTransformation = if (!isClicked) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
                     Icon(
-                        painter = painterResource(id = if(isClicked) ic_eye_off else ic_eye_open),
+                        painter = painterResource(id = if(isClicked) ic_eye_close else ic_eye_open),
                         contentDescription = null,
                         modifier = Modifier.clickable(
                             onClick = {

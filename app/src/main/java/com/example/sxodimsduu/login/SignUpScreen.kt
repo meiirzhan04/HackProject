@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sxodimsduu.R
+import com.example.sxodimsduu.data.Screen
 
 @Composable
 fun SignUpScreen(
@@ -188,7 +189,9 @@ fun SignUpScreen(
         Spacer(modifier = Modifier.height(40.dp))
         CustomButton(
             text = "Sign Up",
-            onClick = {}
+            onClick = {
+                navController.navigate(Screen.MainScreen)
+            }
         )
     }
 }
