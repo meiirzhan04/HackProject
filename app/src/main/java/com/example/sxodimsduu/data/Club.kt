@@ -1,6 +1,6 @@
 package com.example.sxodimsduu.data
 
 data class Club(
-    val name: String,
+    val image: Int,
     val isSelected: Boolean = false
 )

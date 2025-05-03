@@ -37,6 +37,9 @@ import androidx.navigation.NavController
 import com.example.sxodimsduu.R.drawable.ic_back
 import com.example.sxodimsduu.R.drawable.ic_eye_close
 import com.example.sxodimsduu.R.drawable.ic_eye_open
+import com.example.sxodimsduu.R.drawable.ic_eye_off
+import com.example.sxodimsduu.R.drawable.ic_eye_open
+import com.example.sxodimsduu.login.CustomButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
