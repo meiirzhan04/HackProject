@@ -50,6 +50,7 @@ import androidx.navigation.NavController
 import com.example.sxodimsduu.R
 import java.nio.file.WatchEvent
 import android.util.Log
+import android.widget.Toast
 
 @Composable
 fun SignUpScreen(
@@ -62,12 +63,24 @@ fun SignUpScreen(
     var isClicked by remember { mutableStateOf(false) }
     var isLoading by remember { mutableStateOf(false) }  // Для отображения состояния загрузки
 
-    // Функция для обработки регистрации
-    val onSignUpClicked = {
+    val onSignUpClicked = let@{
         Log.d("SignUp", "Sign Up button clicked")
 
         // Проверяем, чтобы данные были заполнены
         if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
+            // Валидация email
+            if (!email.endsWith("@sdu.edu.kz")) {
+                println("Invalid email format. Please use your @sdu.edu.kz email.")
+                return@let
+            }
+
+            // Валидация пароля: минимум 8 символов, хотя бы одна цифра, одна заглавная буква, один специальный символ
+            val passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}\$"
+            if (!password.matches(passwordPattern.toRegex())) {
+                println("Password must be at least 8 characters long, include at least one uppercase letter, one digit, and one special character.")
+                return@let
+            }
+
             isLoading = true
 
             val newUser = User(
@@ -78,14 +91,12 @@ fun SignUpScreen(
 
             // Отправляем запрос на сервер с использованием Retrofit
             RetrofitInstance.api.signUp(newUser).enqueue(object : Callback<User> {
-
-
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     isLoading = false
                     if (response.isSuccessful) {
                         Log.d("SignUp", "Data validated, sending request...")
                         // Успешная регистрация
-                        println("Succesfull login!") // Переводим на экран логина
+                        println("Successful login!") // Переводим на экран логина
                     } else {
                         // Обработка ошибок, например, неверный email или пароль
                         println("Error: ${response.message()}")
@@ -104,6 +115,7 @@ fun SignUpScreen(
             println("Please fill in all fields")
         }
     }
+
 
     Column(
         modifier = Modifier
