@@ -1,6 +1,7 @@
 package com.example.sxodimsduu.login
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -67,7 +68,12 @@ fun SignUp(navController: NavHostController) {
             Text(
                 text = "Login",
                 color = Color(0xFF_12CDD9),
-                fontWeight = FontWeight.SemiBold
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.clickable(
+                    onClick = {
+                        navController.navigate(Screen.LoginScreen)
+                    }
+                )
            )
         }
     }

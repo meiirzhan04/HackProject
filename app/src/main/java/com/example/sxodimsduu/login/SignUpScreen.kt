@@ -3,6 +3,7 @@
 package com.example.sxodimsduu.login
 
 import android.R.attr.tag
+import android.R.attr.text
 import androidx.compose.foundation.Image
 import retrofit2.Call
 import retrofit2.Callback
@@ -51,6 +52,7 @@ import com.example.sxodimsduu.R
 import java.nio.file.WatchEvent
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import com.example.sxodimsduu.data.Screen
 
 @Composable
@@ -60,7 +62,6 @@ fun SignUpScreen(
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var isPasswordVisible by remember { mutableStateOf(false) }
     var isClicked by remember { mutableStateOf(false) }
     var isLoading by remember { mutableStateOf(false) }  // Для отображения состояния загрузки
 
@@ -71,14 +72,22 @@ fun SignUpScreen(
         if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
             // Валидация email
             if (!email.endsWith("@sdu.edu.kz")) {
-                println("Invalid email format. Please use your @sdu.edu.kz email.")
+                Toast.makeText(
+                    navController.context,
+                    "Please fill email with @sdu.edu.kz",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@let
             }
 
             // Валидация пароля: минимум 8 символов, хотя бы одна цифра, одна заглавная буква, один специальный символ
             val passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}\$"
             if (!password.matches(passwordPattern.toRegex())) {
-                println("Password must be at least 8 characters long, include at least one uppercase letter, one digit, and one special character.")
+                Toast.makeText(
+                    navController.context,
+                    "Password must be at least 8 characters long, include at least one uppercase letter, one digit, and one special character.",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@let
             }
 
@@ -96,8 +105,11 @@ fun SignUpScreen(
                     isLoading = false
                     if (response.isSuccessful) {
                         Log.d("SignUp", "Data validated, sending request...")
-                        // Успешная регистрация
-                        println("Successful login!") // Переводим на экран логина
+                        Toast.makeText(
+                            navController.context,
+                            "Please fill in all fields",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     } else {
                         // Обработка ошибок, например, неверный email или пароль
                         println("Error: ${response.message()}")
@@ -151,67 +163,54 @@ fun SignUpScreen(
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(72.dp))
-        OutlinedTextField(
+        androidx.compose.material3.OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = name,
             onValueChange = { name = it },
-            textStyle = TextStyle(
-                fontSize = 14.sp,
-                fontWeight = FontWeight.W400,
-                color = Color(0xFF_92929D)
-            ),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = Color.White,
+            shape = RoundedCornerShape(24.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color(0xFF_252836),
                 unfocusedBorderColor = Color(0xFF_252836),
+                focusedTextColor = Color(0xFF_92929D),
+                unfocusedTextColor = Color(0xFF_92929D),
+                focusedLabelColor = Color(0xFF_EBEBEF)
             ),
-            modifier = Modifier
-                .fillMaxWidth(),
             placeholder = {
                 Text(
                     text = "Full Name",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.W400,
-                    color = Color(0xFF_EBEBEF)
+                    color = Color(0xFF_92929D)
                 )
-            },
-            shape = RoundedCornerShape(24.dp),
+            }
         )
         Spacer(modifier = Modifier.height(24.dp))
-        OutlinedTextField(
+        androidx.compose.material3.OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = email,
             onValueChange = { email = it },
-            textStyle = TextStyle(
-                fontSize = 14.sp,
-                fontWeight = FontWeight.W400,
-                color = Color(0xFF_92929D)
-            ),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = Color.White,
+            shape = RoundedCornerShape(24.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color(0xFF_252836),
                 unfocusedBorderColor = Color(0xFF_252836),
+                focusedTextColor = Color(0xFF_92929D),
+                unfocusedTextColor = Color(0xFF_92929D),
+                focusedLabelColor = Color(0xFF_EBEBEF)
             ),
-            modifier = Modifier
-                .fillMaxWidth(),
             placeholder = {
                 Text(
                     text = "Email Address",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.W400,
-                    color = Color(0xFF_EBEBEF)
+                    color = Color(0xFF_92929D)
                 )
-            },
-            shape = RoundedCornerShape(24.dp),
+            }
         )
         Spacer(modifier = Modifier.height(24.dp))
         OutlinedTextField(
             value = password,
             onValueChange = { password = it },
-            textStyle = TextStyle(
-                fontSize = 14.sp,
-                fontWeight = FontWeight.W400,
-                color = Color(0xFF_92929D)
-            ),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = Color.White,
+                focusedBorderColor = Color(0xFF_252836),
                 unfocusedBorderColor = Color(0xFF_252836),
+                textColor = Color(0xFF_92929D),
+                focusedLabelColor = Color(0xFF_EBEBEF)
             ),
             modifier = Modifier
                 .fillMaxWidth(),
@@ -220,7 +219,7 @@ fun SignUpScreen(
                     text = "Password",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.W400,
-                    color = Color(0xFF_EBEBEF)
+                    color = Color(0xFF_92929D)
                 )
             },
             visualTransformation = if (!isClicked) VisualTransformation.None else PasswordVisualTransformation(),
@@ -248,8 +247,16 @@ fun SignUpScreen(
         CustomButton(
             text = "Sign Up",
             onClick = {
-                onSignUpClicked()
-                navController.navigate(Screen.HomeScreen)
+                if (email.isEmpty() || password.isEmpty() || name.isEmpty()) {
+                    Toast.makeText(
+                        navController.context,
+                        "Please fill in all fields",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    onSignUpClicked()
+                    navController.navigate(Screen.HomeScreen)
+                }
             }
         )
     }

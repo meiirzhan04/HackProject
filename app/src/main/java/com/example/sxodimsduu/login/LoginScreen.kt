@@ -90,7 +90,7 @@ fun LoginScreen(navController: NavController) {
         ) {
             Spacer(modifier = Modifier.height(40.dp))
             Text(
-                text = "Hi, Tiffany",
+                text = "Hi",
                 fontSize = 24.sp,
                 color = Color.White,
                 fontWeight = FontWeight.SemiBold
