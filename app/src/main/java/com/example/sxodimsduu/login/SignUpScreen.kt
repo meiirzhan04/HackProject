@@ -24,9 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
+//noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
@@ -46,6 +44,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sxodimsduu.R
 import java.nio.file.WatchEvent
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 
 @Composable
 fun SignUpScreen(

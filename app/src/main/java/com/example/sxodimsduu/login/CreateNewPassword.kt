@@ -1,6 +1,7 @@
 package com.example.sxodimsduu.login
 
 import android.R.attr.navigationIcon
+import android.R.attr.password
 import android.R.attr.text
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.OutlinedTextFieldDefaults.contentPadding
@@ -46,10 +48,11 @@ import com.example.sxodimsduu.R.drawable.*
 @Preview
 @ExperimentalMaterial3Api
 @Composable
-fun LoginScreen() {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var isClicked by remember { mutableStateOf(false) }
+fun CreateNewPassword() {
+    var isClicked1 by remember { mutableStateOf(false) }
+    var isClicked2 by remember { mutableStateOf(false) }
+    var newPassword by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
 
     Scaffold(
         modifier = Modifier
@@ -73,9 +76,7 @@ fun LoginScreen() {
                         painter = painterResource(id = ic_back),
                         contentDescription = null,
                         modifier = Modifier.clickable(
-                            onClick = {
-
-                            }
+                            onClick = {}
                         )
                     )
                 },
@@ -93,15 +94,15 @@ fun LoginScreen() {
         ) {
             Spacer(modifier = Modifier.height(40.dp))
             Text(
-                text = "Hi, Tiffany",
+                text = "Create new Password",
                 fontSize = 24.sp,
                 color = Color.White,
                 fontWeight = FontWeight.SemiBold
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Welcome back! Please enter \n your details",
-                fontSize = 12.sp,
+                text = "Enter your new password",
+                fontSize = 14.sp,
                 color = Color.White,
                 fontWeight = FontWeight.Medium,
                 textAlign = TextAlign.Center
@@ -109,40 +110,53 @@ fun LoginScreen() {
             Spacer(modifier = Modifier.height(64.dp))
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = email,
-                onValueChange = { email = it },
-                label = { Text(text = "Email Address") },
+                value = newPassword,
+                onValueChange = { newPassword = it },
+                label = { Text(text = "New Password") },
                 shape = RoundedCornerShape(24.dp),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = Color(0xFF_252836),
                     unfocusedBorderColor = Color(0xFF_252836),
-                    focusedTextColor = Color(0xFF_92929D),
-                    unfocusedTextColor = Color(0xFF_92929D),
-                    focusedLabelColor = Color(0xFF_EBEBEF)
-                )
+                    focusedBorderColor = Color(0xFF_252836),
+                    focusedTextColor = Color(0xFF_EBEBEF),
+                    focusedLabelColor = Color(0xFF_EBEBEF),
+                    unfocusedTextColor = Color(0xFF_92929D)
+                ),
+                visualTransformation = if (!isClicked1) VisualTransformation.None else PasswordVisualTransformation(),
+                trailingIcon = {
+                    Icon(
+                        painter = painterResource(id = if(isClicked1) ic_eye_off else ic_eye_open),
+                        contentDescription = null,
+                        modifier = Modifier.clickable(
+                            onClick = {
+                                isClicked1 = !isClicked1
+                            }
+                        ),
+                        tint = Color(0xFF_92929D)
+                    )
+                }
             )
             Spacer(modifier = Modifier.height(32.dp))
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = password,
-                onValueChange = { password = it },
-                label = { Text(text = "Password") },
+                value = confirmPassword,
+                onValueChange = { confirmPassword = it },
+                label = { Text(text = "Confirm Password") },
                 shape = RoundedCornerShape(24.dp),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = Color(0xFF_252836),
                     unfocusedBorderColor = Color(0xFF_252836),
-                    focusedTextColor = Color(0xFF_92929D),
-                    unfocusedTextColor = Color(0xFF_92929D),
-                    focusedLabelColor = Color(0xFF_EBEBEF)
+                    focusedBorderColor = Color(0xFF_252836),
+                    focusedTextColor = Color(0xFF_EBEBEF),
+                    focusedLabelColor = Color(0xFF_EBEBEF),
+                    unfocusedTextColor = Color(0xFF_92929D)
                 ),
-                visualTransformation = if (!isClicked) VisualTransformation.None else PasswordVisualTransformation(),
+                visualTransformation = if (!isClicked2) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
                     Icon(
-                        painter = painterResource(id = if(isClicked) ic_eye_off else ic_eye_open),
+                        painter = painterResource(id = if(isClicked2) ic_eye_off else ic_eye_open),
                         contentDescription = null,
                         modifier = Modifier.clickable(
                             onClick = {
-                                isClicked = !isClicked
+                                isClicked2 = !isClicked2
                             }
                         ),
                         tint = Color(0xFF_92929D)
@@ -158,9 +172,7 @@ fun LoginScreen() {
                 modifier = Modifier
                     .align(Alignment.End)
                     .clickable(
-                        onClick = {
-
-                        }
+                        onClick = {}
                     )
             )
             Spacer(modifier = Modifier.height(40.dp))
