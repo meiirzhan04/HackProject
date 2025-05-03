@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun CustomButton(
@@ -14,7 +15,9 @@ fun CustomButton(
     backgroundColor: Color = Color(0xFF_12CDD9)
 ) {
     Button(
-        onClick = {} ,
+        onClick = {
+
+        } ,
         modifier = Modifier.fillMaxWidth() ,
         colors = ButtonDefaults.buttonColors(
             containerColor = backgroundColor,
@@ -22,7 +25,8 @@ fun CustomButton(
         )
     ) {
         Text(
-            text = text
+            text = text,
+            fontWeight = FontWeight.Medium
         )
     }
 }
