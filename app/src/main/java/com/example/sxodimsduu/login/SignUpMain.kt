@@ -1,5 +1,6 @@
 package com.example.sxodimsduu.login
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,14 +19,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.sxodimsduu.R
+import com.example.sxodimsduu.data.Screen
 
-@Preview
 @Composable
-fun SignUp() {
+fun SignUp(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color(0xFF_1F1D2B))
             .padding(horizontal = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -44,11 +47,15 @@ fun SignUp() {
             fontSize = 14.sp,
             color = Color(0xFF_92929D),
             fontWeight = FontWeight.SemiBold,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            letterSpacing = 0.5.sp,
         )
         Spacer(modifier = Modifier.height(64.dp))
         CustomButton(
-            text = "Sign Up"
+            text = "Sign Up",
+            onClick = {
+                navController.navigate(Screen.LoginScreen)
+            }
         )
         Spacer(modifier = Modifier.height(32.dp))
         Row {

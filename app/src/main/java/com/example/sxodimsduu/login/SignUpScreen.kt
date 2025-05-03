@@ -2,8 +2,6 @@
 
 package com.example.sxodimsduu.login
 
-import android.R.attr.tag
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,21 +15,20 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -41,11 +38,11 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sxodimsduu.R
-import java.nio.file.WatchEvent
 
 @Composable
 fun SignUpScreen(
@@ -54,25 +51,7 @@ fun SignUpScreen(
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var isPasswordVisible by remember { mutableStateOf(false) }
     var isClicked by remember { mutableStateOf(false) }
-    val onSignInClicked: () -> Unit = {
-        navController.navigate("loginscreen")
-    }
-    val annotatedTextSignIn = buildAnnotatedString {
-        append("Already have an account? ")
-        pushStringAnnotation(tag = "SignIn", annotation = "SignIn")
-        withStyle(
-            style = SpanStyle(
-                color = Color(0xFF_FE8C00),
-                fontWeight = FontWeight.SemiBold,
-            )
-        ) {
-            append("Sign In")
-        }
-
-    }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -241,7 +220,7 @@ fun TermsOfServiceAgreementRow(
                 fontWeight = FontWeight.W500,
                 fontSize = 12.sp,
 
-            )
+                )
         ) {
             append("Terms and Services")
         }

@@ -19,7 +19,6 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -65,6 +64,7 @@ fun OnboardingScreen(navController: NavController) {
                 navController = navController,
                 pagerState = pagerState,
                 onCLick = {
+                    navController.navigate(Screen)
                 }
             )
         }
@@ -83,6 +83,10 @@ fun OnboardingScreen(navController: NavController) {
         ) {
             Button(
                 onClick = {
+                    scope.launch {
+                        preferences.setOnboardingCompleted()
+                        navController.navigate(Screen)
+                    }
                 },
                 shape = RoundedCornerShape(14.dp),
                 modifier = Modifier
@@ -112,10 +116,7 @@ fun OnBoardingPage(
     pagerState: PagerState,
     onCLick: () -> Unit,
 ) {
-    val scope = rememberCoroutineScope()
     val context = LocalContext.current
-    val preferences = remember { OnboardingPreferences(context) }
-    val pagerState = rememberPagerState { onboardingPages.size }
     Column(
         modifier = Modifier.fillMaxSize(),
     ) {

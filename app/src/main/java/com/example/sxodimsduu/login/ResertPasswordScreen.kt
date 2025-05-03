@@ -40,7 +40,6 @@ fun ResetPasswordScreen(
     navController: NavController
 ) {
     var email by remember { mutableStateOf("") }
-    var isClicked by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier
             .fillMaxSize()
