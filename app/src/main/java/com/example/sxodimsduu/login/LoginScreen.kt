@@ -2,6 +2,7 @@ package com.example.sxodimsduu.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -35,6 +36,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sxodimsduu.R.drawable.ic_back
 import com.example.sxodimsduu.R.drawable.ic_eye_off
+import com.example.sxodimsduu.R.drawable.ic_eye_open
+import com.example.sxodimsduu.login.CustomButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
