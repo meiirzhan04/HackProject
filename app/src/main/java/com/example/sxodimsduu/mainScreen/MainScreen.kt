@@ -124,9 +124,7 @@ fun MainScreen(navController: NavController) {
                     fontWeight = FontWeight.Normal,
                     color = Color(0xFF_12CDD9),
                     modifier = Modifier.padding(horizontal = 24.dp).clickable(
-                        onClick = {
-                            Screen.ClubSelectionScreen
-                        },
+                        onClick = {},
                         indication = ripple(bounded = true),
                         interactionSource = null
                     ),

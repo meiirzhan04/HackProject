@@ -18,26 +18,96 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.sxodimsduu.R
 import com.example.sxodimsduu.login.CustomButton
 
-@Preview
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EventScreen() {
+fun EventScreen(navController: NavHostController) {
+    var showForgotPasswordSheet by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val sheetState = rememberModalBottomSheetState()
+    if (showForgotPasswordSheet) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                showForgotPasswordSheet = false
+            },
+            shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
+            containerColor = Color(0xFF_1F1D2B),
+            sheetState = sheetState,
+            scrimColor = Color.Black.copy(alpha = 0.5f),
+            dragHandle = {
+                CustomDragHandle()
+            },
+            content = {
+                LazyColumn(
+                    modifier = Modifier
+                        .padding(20.dp)
+                ) {
+                    item {
+                        androidx.compose.material3.Text(
+                            text = "Choose the way of Payment",
+                            color = Color.White,
+                            fontSize = 24.sp,
+                            lineHeight = 32.sp,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        ForgotPasswordBoxes(
+                            image = R.drawable.ic_kaspi,
+                            title = "Kaspi Pay",
+                            subtitle = "asdsdas",
+                            selectedMethod = {}
+                        )
+                        ForgotPasswordBoxes(
+                            image = R.drawable.ic_wallet,
+                            title = "Cash",
+                            subtitle = "asdsdas",
+                            selectedMethod = {}
+                        )
+                        Spacer(modifier = Modifier.height(30.dp))
+                        Button(
+                            onClick = {},
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(52.dp),
+                            shape = RoundedCornerShape(100.dp),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFE8C00))
+                        ) {
+                            Text(
+                                text = "Continue"
+                            )
+                        }
+                        Spacer(modifier = Modifier.weight(1f))
+                    }
+                }
+            }
+        )
+    }
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -62,6 +132,7 @@ fun EventScreen() {
                         .clickable(
                             onClick = {
 
+                                navController.popBackStack()
                             },
                             indication = ripple(bounded = true),
                             interactionSource = null
@@ -155,6 +226,7 @@ fun EventScreen() {
                     "Get Ticket",
                     Color(0xFF_FF8700),
                     onClick = {
+                        showForgotPasswordSheet = true
 
                     }
                 )

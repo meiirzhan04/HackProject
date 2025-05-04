@@ -18,27 +18,34 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.sxodimsduu.R
+import com.example.sxodimsduu.data.Screen
 import com.example.sxodimsduu.login.CustomButton
 
-@Preview
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WeScreen(
-) {
+fun WeScreen(navController: NavHostController) {
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -63,6 +70,7 @@ fun WeScreen(
                         .clickable(
                             onClick = {
 
+                                navController.popBackStack()
                             },
                             indication = ripple(bounded = true),
                             interactionSource = null
@@ -75,8 +83,7 @@ fun WeScreen(
                         .align(Alignment.BottomStart),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                }
+                ) {}
             }
             Column(
                 modifier = Modifier
@@ -139,10 +146,11 @@ fun WeScreen(
                     "Get Ticket",
                     Color(0xFF_FF8700),
                     onClick = {
-
+                        navController.navigate(Screen.PaymentScreen)
                     }
                 )
             }
         }
     }
 }
+

@@ -24,5 +24,21 @@ sealed interface Screen {
     @Serializable
     object HomeScreen : Screen
     @Serializable
-    object ClubSelectionScreen : Screen
+    object ArtClub : Screen
+    @Serializable
+    object EventClub : Screen
+    @Serializable
+    object MusicClub : Screen
+    @Serializable
+    object MountainKings : Screen
+    @Serializable
+    object OrleanClub : Screen
+    @Serializable
+    object WeClub : Screen
+    @Serializable
+    object ZhasaClub : Screen
+    @Serializable
+    object DombyraClub : Screen
+    @Serializable
+    object PaymentScreen : Screen
 }

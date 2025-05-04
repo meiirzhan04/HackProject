@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.example.sxodimsduu.data.Screen
 import com.example.sxodimsduu.mainScreen.HomeScreen
-import com.example.sxodimsduu.mainScreen.MainScreen
+import com.example.sxodimsduu.mainScreen.PaymentScreen
 import com.example.sxodimsduu.mainscreens.FavoriteScreen
 import com.example.sxodimsduu.mainscreens.ProfileScreen
 import com.example.sxodimsduu.mainscreens.SearchScreen
