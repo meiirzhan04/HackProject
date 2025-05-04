@@ -248,6 +248,33 @@ fun ProfileScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
+                        painter = painterResource(id = R.drawable.ic_edit),
+                        contentDescription = null,
+                        tint = Color(0xFF_12CDD9)
+                    )
+                    Spacer(modifier = Modifier.width(16.dp))
+                    Text(
+                        text = "GPA",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = Color.White
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_next_profile),
+                        contentDescription = null,
+                        tint = Color(0xFF_12CDD9),
+                        modifier = Modifier
+                            .clickable(
+                                onClick = {}
+                            )
+                    )
+                }
+                Spacer(modifier = Modifier.height(32.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
                         painter = painterResource(id = R.drawable.ic_info),
                         contentDescription = null,
                         tint = Color(0xFF_12CDD9)

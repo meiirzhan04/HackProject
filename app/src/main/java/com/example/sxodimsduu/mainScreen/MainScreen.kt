@@ -55,13 +55,6 @@ fun MainScreen(navController: NavController) {
             .background(Color(0xFF_1F1D2B))
     ) {
         item {
-            /*Card(
-                modifier = Modifier
-                    .padding(24.dp),
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                CountdownTimer()
-            }*/
             Spacer(modifier = Modifier.height(50.dp))
             OutlinedTextField(
                 value = name,
@@ -183,7 +176,7 @@ fun CategoryTabs() {
 @Composable
 fun CountdownTimer() {
     val timeInMillis: MutableState<Long> =
-        remember { mutableLongStateOf(39 * 60 * 1000 + 27 * 1000L) }
+        remember { mutableStateOf(39 * 60 * 1000 + 27 * 1000L) }
 
     val countDownTimer = object : CountDownTimer(timeInMillis.value, 1000) {
         override fun onTick(millisUntilFinished: Long) {
@@ -200,14 +193,16 @@ fun CountdownTimer() {
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
     ) {
         Text(
-            text = "Your text here",
+            text = "Left",
             fontSize = 20.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = Color.White
         )
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
@@ -218,10 +213,4 @@ fun CountdownTimer() {
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MainScreen(navController = NavController(context = LocalContext.current))
 }

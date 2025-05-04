@@ -58,14 +58,11 @@ fun SignUpScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var isClicked by remember { mutableStateOf(false) }
-    var isLoading by remember { mutableStateOf(false) }  // Для отображения состояния загрузки
+    var isLoading by remember { mutableStateOf(false) }
 
     val onSignUpClicked = let@{
         Log.d("SignUp", "Sign Up button clicked")
-
-        // Проверяем, чтобы данные были заполнены
         if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-            // Валидация email
             if (!email.endsWith("@sdu.edu.kz")) {
                 Toast.makeText(
                     navController.context,
@@ -74,8 +71,6 @@ fun SignUpScreen(
                 ).show()
                 return@let
             }
-
-            // Валидация пароля: минимум 8 символов, хотя бы одна цифра, одна заглавная буква, один специальный символ
             val passwordPattern =
                 "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}\$"
             if (!password.matches(passwordPattern.toRegex())) {
@@ -93,28 +88,23 @@ fun SignUpScreen(
                 password = password,
                 name = name
             )
-
-            // Отправляем запрос на сервер с использованием Retrofit
             RetrofitInstance.api.signUp(newUser).enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     isLoading = false
                     if (response.isSuccessful) {
                         Log.d("SignUp", "Data validated, sending request...")
                     } else {
-                        // Обработка ошибок, например, неверный email или пароль
                         println("Error: ${response.message()}")
                     }
                 }
 
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     isLoading = false
-                    // Ошибка соединения или другие проблемы
                     println("Failure: ${t.message}")
                 }
             })
         } else {
             Log.d("SignUp", "Please fill in all fields")
-            // Показать сообщение о том, что поля должны быть заполнены
             println("Please fill in all fields")
         }
     }

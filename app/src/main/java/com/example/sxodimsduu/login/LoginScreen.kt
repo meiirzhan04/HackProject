@@ -73,7 +73,6 @@ fun LoginScreen(navController: NavController) {
         } else {
             Log.d("Login", "Please fill in all fields")
         }
-        // Явно возвращаем Unit, чтобы лямбда была ()->Unit
         Unit
     }
 
