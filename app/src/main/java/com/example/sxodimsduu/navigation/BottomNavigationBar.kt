@@ -23,7 +23,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.sxodimsduu.R
 import com.example.sxodimsduu.data.Screen
-import com.example.sxodimsduu.mainscreens.ProfileScreen
 import com.example.sxodimsduu.mainscreens.SearchScreen
 
 @Composable

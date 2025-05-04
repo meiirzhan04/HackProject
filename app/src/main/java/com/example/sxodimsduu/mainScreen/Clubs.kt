@@ -37,7 +37,6 @@ import kotlin.math.log
 @Preview
 @Composable
 fun ClubSelectionScreen() {
-    // State with background images
     val clubs = remember {
         mutableStateListOf(
             Club(R.drawable.we_club),
@@ -59,7 +58,6 @@ fun ClubSelectionScreen() {
     ) {
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Title
         Text(
             text = "Clubs",
             color = Color.White,
@@ -70,7 +68,6 @@ fun ClubSelectionScreen() {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Clubs grid
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             modifier = Modifier.fillMaxWidth(),
@@ -100,7 +97,6 @@ fun ClubItemWithBackground(club: Club, onClick: () -> Unit) {
             .clip(RoundedCornerShape(12.dp))
             .clickable (onClick = onClick)
     ) {
-        // Background image
         Image(
             painter = painterResource(id = club.image),
             contentDescription = null,
@@ -108,7 +104,6 @@ fun ClubItemWithBackground(club: Club, onClick: () -> Unit) {
             contentScale = ContentScale.Crop
         )
 
-        // Dark overlay with different opacity when selected
         Box(
             modifier = Modifier
                 .fillMaxSize()

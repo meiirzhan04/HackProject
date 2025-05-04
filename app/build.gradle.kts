@@ -57,6 +57,7 @@ dependencies {
     implementation ("androidx.datastore:datastore-preferences:1.1.4")
     implementation ("androidx.compose.ui:ui:1.7.8")
     implementation ("com.google.code.gson:gson:2.10.1")
+    implementation ("androidx.compose.material3:material3:1.1.1")
 
 
     implementation(libs.androidx.navigation.compose)

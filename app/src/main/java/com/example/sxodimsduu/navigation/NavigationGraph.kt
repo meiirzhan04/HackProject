@@ -1,5 +1,6 @@
 package com.example.sxodimsduu.navigation
 
+import ProfileScreen
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -7,7 +8,6 @@ import com.example.sxodimsduu.data.Screen
 import com.example.sxodimsduu.mainScreen.HomeScreen
 import com.example.sxodimsduu.mainScreen.MainScreen
 import com.example.sxodimsduu.mainscreens.FavoriteScreen
-import com.example.sxodimsduu.mainscreens.ProfileScreen
 import com.example.sxodimsduu.mainscreens.SearchScreen
 
 fun NavGraphBuilder.addMainScreens(navController: NavHostController) {
@@ -17,7 +17,7 @@ fun NavGraphBuilder.addMainScreens(navController: NavHostController) {
         )
     }
     composable<Screen.ProfileScreen> {
-        ProfileScreen(navController)
+        ProfileScreen()
     }
     composable<Screen.SearchScreen> {
         SearchScreen(navController)
