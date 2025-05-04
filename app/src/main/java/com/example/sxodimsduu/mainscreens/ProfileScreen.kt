@@ -75,14 +75,14 @@ fun ProfileScreen() {
                     Spacer(modifier = Modifier.width(16.dp))
                     Column {
                         Text(
-                            text = "Tiffany",
+                            text = "Manas",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = Color.White
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "Tiffany@gmail.com",
+                            text = "manas.esendikov@mail.ru",
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Medium,
                             color = Color(0xFF_B1B1B1)

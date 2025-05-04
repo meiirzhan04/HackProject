@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -28,6 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.sxodimsduu.login.CustomButton
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -101,21 +103,14 @@ fun HelpScreen() {
                 .fillMaxWidth()
                 .padding(bottom = 8.dp),
             placeholder = { Text("Your suggestions...") },
-            maxLines = 3
+            maxLines = 3,
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedTextColor = Color.White,
+                focusedBorderColor = Color(0xFF_B1B1B1),
+                unfocusedTextColor = Color(0xFF_B1B1B1)
+            )
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Button(
-            onClick = {
-                val intent = Intent(Intent.ACTION_SENDTO).apply {
-                    data = Uri.parse("mailto:help@unievents.edu")
-                    putExtra(Intent.EXTRA_SUBJECT, "UniEvents Feedback")
-                    putExtra(Intent.EXTRA_TEXT, feedbackText)
-                }
-                context.startActivity(intent)
-            },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Submit Feedback")
-        }
+        CustomButton(text = "Send Feedback", Color(0xFF_FF8700), onClick = {feedbackText = ""})
     }
 }
