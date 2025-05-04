@@ -1,7 +1,9 @@
 package com.example.sxodimsduu.data
 
+import android.R.attr.onClick
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,26 +32,30 @@ data class ScreenClasses(
 val listOfScreenClasses = listOf(
     ScreenClasses(
         image = R.drawable.we_club,
-        title = "Screen 1",
-        description = "This is screen 1"
+        title = "WE",
+        description = "Since 2021"
     ),
     ScreenClasses(
-        image = R.drawable.we_club,
-        title = "Screen 2",
-        description = "This is screen 2"
+        image = R.drawable.ic_oyan,
+        title = "Dombyra Club",
+        description = "Since 2018"
     ),
     ScreenClasses(
-        image = R.drawable.we_club,
-        title = "Screen 3",
-        description = "This is screen 3"
+        image = R.drawable.ic_zhasa,
+        title = "Zhasa",
+        description = "Zhasa 2017"
     )
 )
 
 
 @Composable
-fun ScreenBox(item: ScreenClasses) {
+fun ScreenBox(item: ScreenClasses, onClick: () -> Unit = {}) {
     Card(
-        modifier = Modifier.height(200.dp).width(135.dp),
+        modifier = Modifier.height(200.dp).width(135.dp).clickable(
+            onClick = onClick,
+            indication = null,
+            interactionSource = null
+        ),
     ) {
         Image(
             painter = painterResource(id = item.image),

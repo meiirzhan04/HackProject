@@ -1,5 +1,7 @@
 package com.example.sxodimsduu.login
 
+
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -37,9 +39,11 @@ import androidx.navigation.NavController
 import com.example.sxodimsduu.R.drawable.ic_back
 import com.example.sxodimsduu.R.drawable.ic_eye_close
 import com.example.sxodimsduu.R.drawable.ic_eye_open
-import com.example.sxodimsduu.R.drawable.ic_eye_off
-import com.example.sxodimsduu.R.drawable.ic_eye_open
-import com.example.sxodimsduu.login.CustomButton
+import com.example.sxodimsduu.data.Screen
+import com.example.sxodimsduu.network.RetrofitInstance
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,6 +51,31 @@ fun LoginScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var isClicked by remember { mutableStateOf(false) }
+
+    val onLoginClicked: () -> Unit = {
+        Log.d("Login", "Login button clicked")
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            val credentials = LoginRequest(username = email, password = password)
+            RetrofitInstance.api.login(credentials)
+                .enqueue(object : Callback<LoginResponse> {
+                    override fun onResponse(
+                        call: Call<LoginResponse>,
+                        response: Response<LoginResponse>
+                    ) {
+                        Log.d("Login", "Token: ${response.body()?.token}")
+                        navController.navigate("main_screen")
+                    }
+
+                    override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                        Log.e("Login", "Error", t)
+                    }
+                })
+        } else {
+            Log.d("Login", "Please fill in all fields")
+        }
+        // Явно возвращаем Unit, чтобы лямбда была ()->Unit
+        Unit
+    }
 
     Scaffold(
         modifier = Modifier
@@ -145,7 +174,7 @@ fun LoginScreen(navController: NavController) {
                 visualTransformation = if (!isClicked) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
                     Icon(
-                        painter = painterResource(id = if(isClicked) ic_eye_close else ic_eye_open),
+                        painter = painterResource(id = if (isClicked) ic_eye_close else ic_eye_open),
                         contentDescription = null,
                         modifier = Modifier.clickable(
                             onClick = {
@@ -171,7 +200,16 @@ fun LoginScreen(navController: NavController) {
                     )
             )
             Spacer(modifier = Modifier.height(40.dp))
-            CustomButton(text = "Login")
+            CustomButton(
+                text = "Login",
+                onClick = {
+                    onLoginClicked()
+                    navController.navigate(Screen.HomeScreen)
+                }
+            )
+
         }
     }
+
+
 }

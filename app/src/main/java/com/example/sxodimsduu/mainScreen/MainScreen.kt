@@ -136,7 +136,9 @@ fun MainScreen(navController: NavController) {
             ) {
                 items(listOfScreenClasses) { item ->
                     Spacer(modifier = Modifier.width(24.dp))
-                    ScreenBox(item = item)
+                    ScreenBox(item = item, onClick = {
+                        navController.navigate(Screen.WeClub)
+                    })
                 }
             }
         }
@@ -146,7 +148,7 @@ fun MainScreen(navController: NavController) {
 
 @Composable
 fun CategoryTabs() {
-    val categories = listOf("All", "Comedy", "Animation", "Document")
+    val categories = listOf("All", "After 1-3 day", "After 4-7 day", "After 8-14 day")
     val selectedCategory = remember { mutableStateOf("All") }
 
     LazyRow(
