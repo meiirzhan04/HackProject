@@ -2,6 +2,8 @@ package com.example.sxodimsduu.mainScreen
 
 import android.os.CountDownTimer
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +17,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.ripple
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -36,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.sxodimsduu.data.Screen
 import com.example.sxodimsduu.data.ScreenBox
 import com.example.sxodimsduu.data.listOfScreenClasses
 
@@ -102,13 +106,30 @@ fun MainScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(20.dp))
             CategoryTabs()
             Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                text = "Most popular",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
-                modifier = Modifier.padding(horizontal = 24.dp)
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = "Most popular",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                    modifier = Modifier.padding(horizontal = 24.dp)
+                )
+                Text(
+                    text = "See All",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Normal,
+                    color = Color(0xFF_12CDD9),
+                    modifier = Modifier.padding(horizontal = 24.dp).clickable(
+                        onClick = {},
+                        indication = ripple(bounded = true),
+                        interactionSource = null
+                    ),
+                )
+            }
             Spacer(modifier = Modifier.height(20.dp))
             LazyRow(
                 modifier = Modifier

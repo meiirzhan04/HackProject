@@ -2,15 +2,23 @@ package com.example.sxodimsduu.navigation
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.sxodimsduu.clubs.ArtScreen
+import com.example.sxodimsduu.clubs.DombyraScreen
+import com.example.sxodimsduu.clubs.EventScreen
+import com.example.sxodimsduu.clubs.MountainScreen
+import com.example.sxodimsduu.clubs.MusicScreen
+import com.example.sxodimsduu.clubs.OrleanScreen
+import com.example.sxodimsduu.clubs.WeScreen
+import com.example.sxodimsduu.clubs.ZhasaScreen
 import com.example.sxodimsduu.data.Screen
 import com.example.sxodimsduu.login.LoginScreen
 import com.example.sxodimsduu.login.SignUp
 import com.example.sxodimsduu.login.SignUpScreen
-import com.example.sxodimsduu.mainScreen.MainScreen
-import com.example.sxodimsduu.mainscreens.SearchScreen
+import com.example.sxodimsduu.mainScreen.PaymentScreen
 import com.example.sxodimsduu.onboarding.OnboardingScreen
 import com.example.sxodimsduu.ui.theme.SplashScreen
 import com.example.sxodimsduu.viewmodel.OnboardingPreferences
@@ -57,6 +65,50 @@ fun NavGraph(
                 navController = navController,
             )
         }
-
+        composable<Screen.ArtClub> {
+            ArtScreen(
+                navController = navController,
+            )
+        }
+        composable<Screen.DombyraClub> {
+            DombyraScreen(
+                navController = navController,
+            )
+        }
+        composable<Screen.EventClub> {
+            EventScreen(
+                navController = navController,
+            )
+        }
+        composable<Screen.MusicClub> {
+            MusicScreen(
+                navController = navController,
+            )
+        }
+        composable<Screen.MountainKings> {
+            MountainScreen(
+                navController = navController,
+            )
+        }
+        composable<Screen.OrleanClub> {
+            OrleanScreen(
+                navController = navController,
+            )
+        }
+        composable<Screen.WeClub> {
+            WeScreen(
+                navController = navController,
+            )
+        }
+        composable<Screen.ZhasaClub> {
+            ZhasaScreen(
+                navController = navController,
+            )
+        }
+        composable<Screen.PaymentScreen> {
+            PaymentScreen(
+                navController = navController,
+            )
+        }
     }
 }

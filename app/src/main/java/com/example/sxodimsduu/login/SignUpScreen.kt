@@ -105,11 +105,6 @@ fun SignUpScreen(
                     isLoading = false
                     if (response.isSuccessful) {
                         Log.d("SignUp", "Data validated, sending request...")
-                        Toast.makeText(
-                            navController.context,
-                            "Please fill in all fields",
-                            Toast.LENGTH_SHORT
-                        ).show()
                     } else {
                         // Обработка ошибок, например, неверный email или пароль
                         println("Error: ${response.message()}")

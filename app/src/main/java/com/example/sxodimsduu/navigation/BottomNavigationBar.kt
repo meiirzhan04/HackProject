@@ -32,7 +32,7 @@ fun BottomNavigationBar(navController: NavHostController) {
     ) {
         val items = listOf(
             NavigationItem(Screen.MainScreen, R.drawable.ic_home),
-            NavigationItem(Screen.SearchScreen, R.drawable.ic_search),
+            NavigationItem(Screen.SearchScreen, R.drawable.group),
             NavigationItem(Screen.FavoriteScreen, R.drawable.ic_favourite),
             NavigationItem(Screen.ProfileScreen, R.drawable.ic_profile),
         )
