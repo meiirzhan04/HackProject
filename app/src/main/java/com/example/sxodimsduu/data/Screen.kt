@@ -23,4 +23,6 @@ sealed interface Screen {
     object FavoriteScreen : Screen
     @Serializable
     object HomeScreen : Screen
+    @Serializable
+    object ClubSelectionScreen : Screen
 }
