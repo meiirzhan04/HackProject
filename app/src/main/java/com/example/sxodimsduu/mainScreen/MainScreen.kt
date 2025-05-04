@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -123,11 +124,13 @@ fun MainScreen(navController: NavController) {
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Normal,
                     color = Color(0xFF_12CDD9),
-                    modifier = Modifier.padding(horizontal = 24.dp).clickable(
-                        onClick = {},
-                        indication = ripple(bounded = true),
-                        interactionSource = null
-                    ),
+                    modifier = Modifier
+                        .padding(horizontal = 24.dp)
+                        .clickable(
+                            onClick = {},
+                            indication = ripple(bounded = true),
+                            interactionSource = null
+                        ),
                 )
             }
             Spacer(modifier = Modifier.height(20.dp))
@@ -179,7 +182,8 @@ fun CategoryTabs() {
 
 @Composable
 fun CountdownTimer() {
-    val timeInMillis: MutableState<Long> = remember { mutableStateOf(39 * 60 * 1000 + 27 * 1000L) }
+    val timeInMillis: MutableState<Long> =
+        remember { mutableLongStateOf(39 * 60 * 1000 + 27 * 1000L) }
 
     val countDownTimer = object : CountDownTimer(timeInMillis.value, 1000) {
         override fun onTick(millisUntilFinished: Long) {

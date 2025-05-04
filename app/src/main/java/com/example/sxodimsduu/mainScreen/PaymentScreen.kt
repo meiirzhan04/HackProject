@@ -1,6 +1,8 @@
 package com.example.sxodimsduu.mainScreen
 
-import android.R.attr.enabled
+import android.annotation.SuppressLint
+import android.app.NotificationManager
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -47,13 +49,17 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.NavController
+import com.example.sxodimsduu.MainActivity
 import com.example.sxodimsduu.R
 import com.example.sxodimsduu.clubs.CustomDragHandle
 import com.example.sxodimsduu.data.Screen
 
 enum class PaymentMethod { Cash, Card }
 
+@SuppressLint("MissingPermission")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PaymentScreen(navController: NavController) {
@@ -62,6 +68,11 @@ fun PaymentScreen(navController: NavController) {
     var cardNumber by remember { mutableStateOf("") }
     var expiry by remember { mutableStateOf("") }
     var cvv by remember { mutableStateOf("") }
+    val context = LocalContext.current
+    val notificationManager = NotificationManagerCompat.from(context)
+    var notificationId by remember { mutableStateOf(0) }
+    val manager = NotificationManagerCompat.from(context)
+    var id by remember { mutableStateOf(0) }
     val sheetState = rememberModalBottomSheetState()
     if (showForgotPasswordSheet) {
         ModalBottomSheet(
@@ -93,7 +104,9 @@ fun PaymentScreen(navController: NavController) {
                             color = Color.White,
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold,
-                            modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 16.dp),
                             textAlign = androidx.compose.ui.text.style.TextAlign.Center
                         )
                         Spacer(modifier = Modifier.height(32.dp))
@@ -102,7 +115,10 @@ fun PaymentScreen(navController: NavController) {
                                 showForgotPasswordSheet = false
                                 navController.navigate(Screen.TicketScreen)
                             },
-                            modifier = Modifier.align(Alignment.CenterHorizontally).height(60.dp).width(130.dp),
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                                .height(60.dp)
+                                .width(130.dp),
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = Color(0xFF_12CDD9),
                                 contentColor = Color.White
@@ -217,6 +233,15 @@ fun PaymentScreen(navController: NavController) {
         Button(
             onClick = {
                 showForgotPasswordSheet = true
+                id++
+                val notif = NotificationCompat.Builder(context, MainActivity.CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_shield)
+                    .setContentTitle("Тест уведомления")
+                    .setContentText("Увед #$id")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setAutoCancel(true)
+                    .build()
+                manager.notify(id, notif)
             },
             enabled = selectedMethod != PaymentMethod.Card ||
                     (cardNumber.replace(" ", "").length == 16
