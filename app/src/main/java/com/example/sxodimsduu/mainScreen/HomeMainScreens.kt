@@ -1,5 +1,6 @@
 package com.example.sxodimsduu.mainScreen
 
+import ProfileScreen
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -19,7 +20,6 @@ import com.example.sxodimsduu.clubs.WeScreen
 import com.example.sxodimsduu.clubs.ZhasaScreen
 import com.example.sxodimsduu.data.Screen
 import com.example.sxodimsduu.mainscreens.FavoriteScreen
-import com.example.sxodimsduu.mainscreens.ProfileScreen
 import com.example.sxodimsduu.mainscreens.SearchScreen
 import com.example.sxodimsduu.navigation.BottomNavigationBar
 
@@ -56,7 +56,7 @@ fun HomeScreen(navController: NavHostController) {
                 isChecked.value = true
             }
             composable<Screen.ProfileScreen> {
-                ProfileScreen(navController)
+                ProfileScreen()
                 isChecked.value = true
             }
             composable<Screen.HomeScreen> {
