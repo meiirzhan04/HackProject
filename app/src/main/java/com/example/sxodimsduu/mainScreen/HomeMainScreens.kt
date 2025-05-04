@@ -19,6 +19,7 @@ import com.example.sxodimsduu.clubs.OrleanScreen
 import com.example.sxodimsduu.clubs.WeScreen
 import com.example.sxodimsduu.clubs.ZhasaScreen
 import com.example.sxodimsduu.data.Screen
+import com.example.sxodimsduu.mainscreens.EditProfile
 import com.example.sxodimsduu.mainscreens.FavoriteScreen
 import com.example.sxodimsduu.mainscreens.SearchScreen
 import com.example.sxodimsduu.navigation.BottomNavigationBar
@@ -56,7 +57,7 @@ fun HomeScreen(navController: NavHostController) {
                 isChecked.value = true
             }
             composable<Screen.ProfileScreen> {
-                ProfileScreen()
+                ProfileScreen(navController)
                 isChecked.value = true
             }
             composable<Screen.HomeScreen> {
@@ -97,6 +98,14 @@ fun HomeScreen(navController: NavHostController) {
             }
             composable<Screen.PaymentScreen> {
                 PaymentScreen(navController)
+                isChecked.value = false
+            }
+            composable<Screen.EditProfile> {
+                EditProfile(navController)
+                isChecked.value = false
+            }
+            composable<Screen.TicketScreen> {
+                TicketScreen(navController)
                 isChecked.value = false
             }
         }

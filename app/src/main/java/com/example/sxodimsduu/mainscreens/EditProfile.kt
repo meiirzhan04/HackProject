@@ -2,6 +2,7 @@ package com.example.sxodimsduu.mainscreens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.material.Text
+import androidx.compose.material.ripple
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -32,11 +34,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.example.sxodimsduu.login.CustomButton
 
-@Preview
 @Composable
-fun EditProfile() {
+fun EditProfile(navController: NavController) {
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -55,7 +57,15 @@ fun EditProfile() {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(painter = painterResource(id = R.drawable.ic_back), contentDescription = null)
+            Image(
+                painter = painterResource(id = R.drawable.ic_back),
+                contentDescription = null,
+                modifier = Modifier.clickable(
+                    onClick = { navController.popBackStack() },
+                    indication = ripple(bounded = true),
+                    interactionSource = null
+                )
+            )
             Text(
                 text = "Edit Profile",
                 fontSize = 16.sp,
@@ -68,7 +78,9 @@ fun EditProfile() {
         Image(
             painter = painterResource(id = R.drawable.ic_profile),
             contentDescription = null,
-            modifier = Modifier.clip(shape = RoundedCornerShape(100.dp)).size(64.dp),
+            modifier = Modifier
+                .clip(shape = RoundedCornerShape(100.dp))
+                .size(64.dp),
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(

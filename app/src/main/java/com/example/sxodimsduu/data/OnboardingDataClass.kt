@@ -9,15 +9,14 @@ data class OnboardingData(
 
 val onboardingPages = listOf(
     OnboardingData(
-        R.drawable.ic_onboardingv1,
-        "Фильмдер, телехикаялар, ситкомдар, анимациялық жобалар, телебағдарламалар мен реалити-шоулар, аниме және тағы басқалары"
+        R.drawable.sdu,
+        "SDU University is one of the leading private universities in Kazakhstan, located in Kaskelen. It was founded in 1996."
     ),
     OnboardingData(
-        R.drawable.ic_onboardingv1, "Кез келген құрылғыдан қара \n" +
-                "Сүйікті фильміңді  қосымша төлемсіз телефоннан, планшеттен, ноутбуктан қара"
+        R.drawable.we_club, "WE - is a student club of the FENS faculty, established in 2021. Its mission is to make the social life of students vibrant, rich and unforgettable."
     ),
     OnboardingData(
-        R.drawable.ic_onboardingv1, "Тіркелу оңай. Қазір тіркел де қалаған фильміңе қол жеткіз"
+        R.drawable.sxodim, "SXODIM.SDU unifies all student services into a single, user-friendly interface and helps you efficiently manage your studies and student life!"
     ),
 
     )

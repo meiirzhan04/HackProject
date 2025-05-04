@@ -17,7 +17,7 @@ fun NavGraphBuilder.addMainScreens(navController: NavHostController) {
         )
     }
     composable<Screen.ProfileScreen> {
-        ProfileScreen()
+        ProfileScreen(navController)
     }
     composable<Screen.SearchScreen> {
         SearchScreen(navController)

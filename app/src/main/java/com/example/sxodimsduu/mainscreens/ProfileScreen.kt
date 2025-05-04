@@ -31,13 +31,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.sxodimsduu.R
+import com.example.sxodimsduu.data.Screen
 import com.example.sxodimsduu.login.CustomButton
 
-@Preview
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(
+    navController: NavController
+) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -60,6 +63,11 @@ fun ProfileScreen() {
                     .height(86.dp)
                     .clip(shape = RoundedCornerShape(16.dp))
                     .border(1.dp, color = Color(0xFF_252836))
+                    .clickable(
+                        onClick = {
+                            navController.navigate(Screen.EditProfile)
+                        }
+                    )
             ) {
                 Row(
                     modifier = Modifier.fillMaxSize(),
@@ -257,6 +265,7 @@ fun ProfileScreen() {
             CustomButton(
                 text = "Log Out",
                 onClick = {
+                    navController.navigate(Screen.LoginScreen)
 
                 }
             )

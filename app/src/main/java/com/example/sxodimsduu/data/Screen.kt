@@ -41,4 +41,8 @@ sealed interface Screen {
     object DombyraClub : Screen
     @Serializable
     object PaymentScreen : Screen
+    @Serializable
+    object EditProfile : Screen
+    @Serializable
+    object TicketScreen : Screen
 }

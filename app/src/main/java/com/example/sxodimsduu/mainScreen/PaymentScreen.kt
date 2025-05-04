@@ -1,5 +1,6 @@
 package com.example.sxodimsduu.mainScreen
 
+import android.R.attr.enabled
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -49,7 +50,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sxodimsduu.R
 import com.example.sxodimsduu.clubs.CustomDragHandle
-import com.example.sxodimsduu.clubs.ForgotPasswordBoxes
+import com.example.sxodimsduu.data.Screen
 
 enum class PaymentMethod { Cash, Card }
 
@@ -99,7 +100,7 @@ fun PaymentScreen(navController: NavController) {
                         Button(
                             onClick = {
                                 showForgotPasswordSheet = false
-                                navController.popBackStack()
+                                navController.navigate(Screen.TicketScreen)
                             },
                             modifier = Modifier.align(Alignment.CenterHorizontally).height(60.dp).width(130.dp),
                             colors = ButtonDefaults.buttonColors(

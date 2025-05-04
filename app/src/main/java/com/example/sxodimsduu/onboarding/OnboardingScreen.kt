@@ -26,7 +26,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.BlendMode.Companion.Screen
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -37,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sxodimsduu.data.OnboardingData
+import com.example.sxodimsduu.data.Screen
 import com.example.sxodimsduu.data.onboardingPages
 import com.example.sxodimsduu.viewmodel.OnboardingPreferences
 import kotlinx.coroutines.launch
@@ -64,7 +64,9 @@ fun OnboardingScreen(navController: NavController) {
                 navController = navController,
                 pagerState = pagerState,
                 onCLick = {
-                    navController.navigate(Screen)
+                    scope.launch {
+                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                    }
                 }
             )
         }
@@ -84,8 +86,8 @@ fun OnboardingScreen(navController: NavController) {
             Button(
                 onClick = {
                     scope.launch {
+                        navController.navigate(Screen.SignUpMain)
                         preferences.setOnboardingCompleted()
-                        navController.navigate(Screen)
                     }
                 },
                 shape = RoundedCornerShape(14.dp),
@@ -97,7 +99,7 @@ fun OnboardingScreen(navController: NavController) {
                 )
             ) {
                 Text(
-                    text = "Әрі қарай",
+                    text = "Continue",
                     fontSize = 16.sp,
                     color = Color.White,
                     fontWeight = FontWeight.W600,
@@ -126,7 +128,7 @@ fun OnBoardingPage(
             Image(
                 painter = painterResource(id = data.image),
                 contentDescription = null,
-                modifier = Modifier.size(538.dp)
+                modifier = Modifier.size(410.dp)
             )
 
             Box(
@@ -154,7 +156,7 @@ fun OnBoardingPage(
                 ) {
                     Spacer(modifier = Modifier.height(100.dp))
                     Text(
-                        text = "ÖZINŞE-ге қош келдің!",
+                        text = "Welcome to SxodimSDU",
                         fontSize = 24.sp,
                         color = Color.White,
                         fontWeight = FontWeight.Bold,
@@ -176,6 +178,7 @@ fun OnBoardingPage(
             }
         }
     }
+
 }
 
 @Composable

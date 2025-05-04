@@ -2,7 +2,6 @@ package com.example.sxodimsduu.navigation
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -19,6 +18,8 @@ import com.example.sxodimsduu.login.LoginScreen
 import com.example.sxodimsduu.login.SignUp
 import com.example.sxodimsduu.login.SignUpScreen
 import com.example.sxodimsduu.mainScreen.PaymentScreen
+import com.example.sxodimsduu.mainScreen.TicketScreen
+import com.example.sxodimsduu.mainscreens.EditProfile
 import com.example.sxodimsduu.onboarding.OnboardingScreen
 import com.example.sxodimsduu.ui.theme.SplashScreen
 import com.example.sxodimsduu.viewmodel.OnboardingPreferences
@@ -107,6 +108,16 @@ fun NavGraph(
         }
         composable<Screen.PaymentScreen> {
             PaymentScreen(
+                navController = navController,
+            )
+        }
+        composable<Screen.EditProfile> {
+            EditProfile(
+                navController = navController,
+            )
+        }
+        composable<Screen.TicketScreen> {
+            TicketScreen(
                 navController = navController,
             )
         }
