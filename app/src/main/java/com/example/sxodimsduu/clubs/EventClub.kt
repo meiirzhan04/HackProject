@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sxodimsduu.R
+import com.example.sxodimsduu.data.Screen
 import com.example.sxodimsduu.login.CustomButton
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -226,7 +227,7 @@ fun EventScreen(navController: NavHostController) {
                     "Get Ticket",
                     Color(0xFF_FF8700),
                     onClick = {
-                        showForgotPasswordSheet = true
+                        navController.navigate(Screen.PaymentScreen)
 
                     }
                 )

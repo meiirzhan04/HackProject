@@ -46,77 +46,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sxodimsduu.R
+import com.example.sxodimsduu.data.Screen
 import com.example.sxodimsduu.login.CustomButton
 import com.example.sxodimsduu.mainScreen.PaymentMethod
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DombyraScreen(navController: NavHostController) {
-    var showForgotPasswordSheet by remember { mutableStateOf(false) }
-    val context = LocalContext.current
-    val sheetState = rememberModalBottomSheetState()
-    var selectedMethod by remember { mutableStateOf(PaymentMethod.Cash) }
-    var cardNumber by remember { mutableStateOf("") }
-    var expiry by remember { mutableStateOf("") }
-    var cvv by remember { mutableStateOf("") }
-    if (showForgotPasswordSheet) {
-        ModalBottomSheet(
-            onDismissRequest = {
-                showForgotPasswordSheet = false
-            },
-            shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
-            containerColor = Color(0xFF_1F1D2B),
-            sheetState = sheetState,
-            scrimColor = Color.Black.copy(alpha = 0.5f),
-            dragHandle = {
-                CustomDragHandle()
-            },
-            content = {
-                LazyColumn(
-                    modifier = Modifier
-                        .padding(20.dp)
-                ) {
-                    item {
-                        androidx.compose.material3.Text(
-                            text = "Choose the way of Payment",
-                            color = Color.White,
-                            fontSize = 24.sp,
-                            lineHeight = 32.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                        Spacer(modifier = Modifier.height(20.dp))
-                        ForgotPasswordBoxes(
-                            image = R.drawable.ic_kaspi,
-                            title = "Kaspi Pay",
-                            subtitle = "asdsdas",
-                            selectedMethod = { selectedMethod = PaymentMethod.Card }
-                        )
-                        ForgotPasswordBoxes(
-                            image = R.drawable.ic_wallet,
-                            title = "Cash",
-                            subtitle = "asdsdas",
-                            selectedMethod = { selectedMethod = PaymentMethod.Cash }
-                        )
-
-                        Spacer(modifier = Modifier.height(30.dp))
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(52.dp),
-                            shape = RoundedCornerShape(100.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFE8C00))
-                        ) {
-                            Text(
-                                text = "Continue"
-                            )
-                        }
-                        Spacer(modifier = Modifier.weight(1f))
-                    }
-                }
-            }
-        )
-    }
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -212,7 +148,7 @@ fun DombyraScreen(navController: NavHostController) {
                     "Get Ticket",
                     Color(0xFF_FF8700),
                     onClick = {
-                        showForgotPasswordSheet = true
+                        navController.navigate(Screen.PaymentScreen)
                     }
                 )
             }
