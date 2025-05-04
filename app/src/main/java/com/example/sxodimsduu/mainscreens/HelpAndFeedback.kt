@@ -1,20 +1,29 @@
 package com.example.sxodimsduu.mainscreens
 
-import android.R.attr.bottom
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,7 +33,9 @@ import java.util.Date
 
 @Preview
 @Composable
-fun LegalAndPoliciesScreen() {
+fun HelpScreen() {
+    val context = LocalContext.current
+    var feedbackText by remember { mutableStateOf("") }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -34,7 +45,7 @@ fun LegalAndPoliciesScreen() {
     ) {
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = "Legal and Policies",
+            text = "Help & Feedback",
             color = Color.White,
             fontWeight = FontWeight.SemiBold,
             fontSize = 24.sp,
@@ -42,7 +53,7 @@ fun LegalAndPoliciesScreen() {
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(
-            text = "Terms of Service",
+            text = "Getting Started",
             color = Color.White,
             fontWeight = FontWeight.Medium,
             fontSize = 18.sp,
@@ -50,17 +61,16 @@ fun LegalAndPoliciesScreen() {
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "By using UniEvents, you agree to:\n" +
-                    "• Use the app only for legitimate university event purposes\n" +
-                    "• Not resell or transfer event tickets for profit\n" +
-                    "• Abide by your university's code of conduct",
+            text = "1. Verify your student email to access events\n" +
+                    "2. Browse upcoming events by category\n" +
+                    "3. Tap \"Attend\" to reserve your spot",
             color = Color.White,
             fontWeight = FontWeight.Medium
         )
         Spacer(modifier = Modifier.height(32.dp))
 
         Text(
-            text = "Privacy Policy",
+            text = "Common Issues",
             color = Color.White,
             fontWeight = FontWeight.SemiBold,
             fontSize = 24.sp,
@@ -69,29 +79,43 @@ fun LegalAndPoliciesScreen() {
 
 
         Text(
-            text = "We collect:\n" +
-                    "• Basic profile information to verify student status\n" +
-                    "• Event preferences to personalize recommendations\n" +
-                    "• Device information for notification delivery",
+            text = "🔹 Can't verify email?\nCheck your university portal for approval\n\n" +
+                    "🔹 Ticket not showing?\nAllow 5 minutes for processing\n\n" +
+                    "🔹 Event full?\nJoin waitlist - 65% get in from waitlists",
             color = Color.White,
             fontWeight = FontWeight.Medium,
         )
         Spacer(modifier = Modifier.height(32.dp))
 
         Text(
-            text = "Contact",
+            text = "Send Feedback",
             fontSize = 24.sp,
             color = Color.White,
             fontWeight = FontWeight.SemiBold
         )
         Spacer(modifier = Modifier.height(24.dp))
-
-        Text(
-            text = "For legal inquiries: legal@unievents.edu\n" +
-                    "Last updated: ${SimpleDateFormat("MMM dd, yyyy").format(Date())}",
-            fontSize = 18.sp,
-            color = Color.White,
-            fontWeight = FontWeight.Medium
+        OutlinedTextField(
+            value = feedbackText,
+            onValueChange = { feedbackText = it },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
+            placeholder = { Text("Your suggestions...") },
+            maxLines = 3
         )
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = {
+                val intent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("mailto:help@unievents.edu")
+                    putExtra(Intent.EXTRA_SUBJECT, "UniEvents Feedback")
+                    putExtra(Intent.EXTRA_TEXT, feedbackText)
+                }
+                context.startActivity(intent)
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Submit Feedback")
+        }
     }
 }
