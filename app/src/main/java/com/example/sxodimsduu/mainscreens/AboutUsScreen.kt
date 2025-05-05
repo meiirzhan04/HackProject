@@ -16,23 +16,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.sxodimsduu.R
 
-@Preview
 @Composable
-fun AboutUsScreen() {
+fun AboutUsScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color(0xFF_1F1D2B))
+            .background(Color(0xFF_1F1D2B))
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(R.drawable.ic_sxodim_sdu),
+            painter = painterResource(R.drawable.sxodim),
             contentDescription = "University Logo",
             modifier = Modifier
                 .size(150.dp)

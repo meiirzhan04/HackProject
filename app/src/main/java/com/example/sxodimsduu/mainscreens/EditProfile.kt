@@ -84,14 +84,14 @@ fun EditProfile(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = "Tiffany",
+            text = "Manas",
             fontSize = 16.sp,
             fontWeight = FontWeight.SemiBold,
             color = Color.White
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "Tiffany@gmail.com",
+            text = "manas.esendikov@sdu.edu.kz",
             fontSize = 14.sp,
             fontWeight = FontWeight.Medium,
             color = Color(0xFF_B1B1B1)

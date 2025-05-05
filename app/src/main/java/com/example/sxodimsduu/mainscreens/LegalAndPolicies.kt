@@ -19,12 +19,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import java.text.SimpleDateFormat
 import java.util.Date
 
-@Preview
 @Composable
-fun LegalAndPoliciesScreen() {
+fun LegalAndPoliciesScreen(
+    navController: NavController
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -88,7 +90,7 @@ fun LegalAndPoliciesScreen() {
 
         Text(
             text = "For legal inquiries: legal@unievents.edu\n" +
-                    "Last updated: ${SimpleDateFormat("MMM dd, yyyy").format(Date())}",
+                    "Last updated: May 04, 2025",
             fontSize = 18.sp,
             color = Color.White,
             fontWeight = FontWeight.Medium

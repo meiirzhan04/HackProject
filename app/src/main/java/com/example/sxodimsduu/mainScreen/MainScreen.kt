@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -54,13 +55,6 @@ fun MainScreen(navController: NavController) {
             .background(Color(0xFF_1F1D2B))
     ) {
         item {
-            /*Card(
-                modifier = Modifier
-                    .padding(24.dp),
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                CountdownTimer()
-            }*/
             Spacer(modifier = Modifier.height(50.dp))
             OutlinedTextField(
                 value = name,
@@ -123,11 +117,13 @@ fun MainScreen(navController: NavController) {
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Normal,
                     color = Color(0xFF_12CDD9),
-                    modifier = Modifier.padding(horizontal = 24.dp).clickable(
-                        onClick = {},
-                        indication = ripple(bounded = true),
-                        interactionSource = null
-                    ),
+                    modifier = Modifier
+                        .padding(horizontal = 24.dp)
+                        .clickable(
+                            onClick = {},
+                            indication = ripple(bounded = true),
+                            interactionSource = null
+                        ),
                 )
             }
             Spacer(modifier = Modifier.height(20.dp))
@@ -136,7 +132,9 @@ fun MainScreen(navController: NavController) {
             ) {
                 items(listOfScreenClasses) { item ->
                     Spacer(modifier = Modifier.width(24.dp))
-                    ScreenBox(item = item)
+                    ScreenBox(item = item, onClick = {
+                        navController.navigate(Screen.WeClub)
+                    })
                 }
             }
         }
@@ -146,7 +144,7 @@ fun MainScreen(navController: NavController) {
 
 @Composable
 fun CategoryTabs() {
-    val categories = listOf("All", "Comedy", "Animation", "Document")
+    val categories = listOf("All", "After 1-3 day", "After 4-7 day", "After 8-14 day")
     val selectedCategory = remember { mutableStateOf("All") }
 
     LazyRow(
@@ -177,7 +175,8 @@ fun CategoryTabs() {
 
 @Composable
 fun CountdownTimer() {
-    val timeInMillis: MutableState<Long> = remember { mutableStateOf(39 * 60 * 1000 + 27 * 1000L) }
+    val timeInMillis: MutableState<Long> =
+        remember { mutableStateOf(39 * 60 * 1000 + 27 * 1000L) }
 
     val countDownTimer = object : CountDownTimer(timeInMillis.value, 1000) {
         override fun onTick(millisUntilFinished: Long) {
@@ -194,14 +193,16 @@ fun CountdownTimer() {
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
     ) {
         Text(
-            text = "Your text here",
+            text = "Left",
             fontSize = 20.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = Color.White
         )
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
@@ -212,10 +213,4 @@ fun CountdownTimer() {
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MainScreen(navController = NavController(context = LocalContext.current))
 }

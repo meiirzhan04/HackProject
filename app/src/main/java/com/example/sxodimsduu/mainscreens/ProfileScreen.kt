@@ -1,10 +1,7 @@
-
-import android.R.attr.tint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,9 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,11 +23,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.example.sxodimsduu.R
 import com.example.sxodimsduu.data.Screen
 import com.example.sxodimsduu.login.CustomButton
@@ -90,14 +83,17 @@ fun ProfileScreen(
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "manas.esendikov@mail.ru",
+                            text = "manas.esendikov@sdu.edu.kz",
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Medium,
                             color = Color(0xFF_B1B1B1)
                         )
                     }
                     Spacer(modifier = Modifier.weight(1f))
-                    Image(painter = painterResource(id = R.drawable.ic_edit), contentDescription = null)
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_edit),
+                        contentDescription = null
+                    )
                     Spacer(modifier = Modifier.width(16.dp))
                 }
             }
@@ -120,7 +116,11 @@ fun ProfileScreen(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(painter = painterResource(id = R.drawable.ic_avatar_profile), contentDescription = null, tint = Color(0xFF_12CDD9))
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_avatar_profile),
+                        contentDescription = null,
+                        tint = Color(0xFF_12CDD9)
+                    )
                     Spacer(modifier = Modifier.width(16.dp))
                     Text(
                         text = "Member",
@@ -139,7 +139,7 @@ fun ProfileScreen(
 
                                 }
                             )
-                        )
+                    )
                 }
                 Spacer(modifier = Modifier.height(32.dp))
                 Row(
@@ -189,7 +189,11 @@ fun ProfileScreen(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(painter = painterResource(id = R.drawable.ic_avatar_profile), contentDescription = null, tint = Color(0xFF_12CDD9))
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_avatar_profile),
+                        contentDescription = null,
+                        tint = Color(0xFF_12CDD9)
+                    )
                     Spacer(modifier = Modifier.width(16.dp))
                     Text(
                         text = "Legal and Policies",
@@ -205,7 +209,7 @@ fun ProfileScreen(
                         modifier = Modifier
                             .clickable(
                                 onClick = {
-
+                                    navController.navigate(Screen.LegalAndPolicies)
                                 }
                             )
                     )
@@ -214,7 +218,11 @@ fun ProfileScreen(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(painter = painterResource(id = R.drawable.ic_shield), contentDescription = null, tint = Color(0xFF_12CDD9))
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_shield),
+                        contentDescription = null,
+                        tint = Color(0xFF_12CDD9)
+                    )
                     Spacer(modifier = Modifier.width(16.dp))
                     Text(
                         text = "Help & Feedback",
@@ -230,7 +238,7 @@ fun ProfileScreen(
                         modifier = Modifier
                             .clickable(
                                 onClick = {
-
+                                    navController.navigate(Screen.HelpAndFeedback)
                                 }
                             )
                     )
@@ -239,7 +247,38 @@ fun ProfileScreen(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(painter = painterResource(id = R.drawable.ic_info), contentDescription = null, tint = Color(0xFF_12CDD9))
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_edit),
+                        contentDescription = null,
+                        tint = Color(0xFF_12CDD9)
+                    )
+                    Spacer(modifier = Modifier.width(16.dp))
+                    Text(
+                        text = "GPA",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = Color.White
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_next_profile),
+                        contentDescription = null,
+                        tint = Color(0xFF_12CDD9),
+                        modifier = Modifier
+                            .clickable(
+                                onClick = {}
+                            )
+                    )
+                }
+                Spacer(modifier = Modifier.height(32.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_info),
+                        contentDescription = null,
+                        tint = Color(0xFF_12CDD9)
+                    )
                     Spacer(modifier = Modifier.width(16.dp))
                     Text(
                         text = "About us",
@@ -255,7 +294,7 @@ fun ProfileScreen(
                         modifier = Modifier
                             .clickable(
                                 onClick = {
-
+                                    navController.navigate(Screen.AboutUsScreen)
                                 }
                             )
                     )
@@ -266,7 +305,6 @@ fun ProfileScreen(
                 text = "Log Out",
                 onClick = {
                     navController.navigate(Screen.LoginScreen)
-
                 }
             )
         }

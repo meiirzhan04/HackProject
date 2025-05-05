@@ -29,13 +29,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.sxodimsduu.login.CustomButton
 import java.text.SimpleDateFormat
 import java.util.Date
 
-@Preview
 @Composable
-fun HelpScreen() {
+fun HelpScreen(
+    navController: NavController
+) {
     val context = LocalContext.current
     var feedbackText by remember { mutableStateOf("") }
     Column(

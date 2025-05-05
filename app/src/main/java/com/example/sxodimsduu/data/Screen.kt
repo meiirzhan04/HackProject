@@ -45,4 +45,10 @@ sealed interface Screen {
     object EditProfile : Screen
     @Serializable
     object TicketScreen : Screen
+    @Serializable
+    object AboutUsScreen : Screen
+    @Serializable
+    object HelpAndFeedback : Screen
+    @Serializable
+    object LegalAndPolicies : Screen
 }

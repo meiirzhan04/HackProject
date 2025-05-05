@@ -2,12 +2,8 @@
 
 package com.example.sxodimsduu.login
 
-import android.R.attr.tag
-import android.R.attr.text
-import androidx.compose.foundation.Image
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -21,24 +17,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -49,11 +44,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sxodimsduu.R
-import java.nio.file.WatchEvent
-import android.util.Log
-import android.widget.Toast
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import com.example.sxodimsduu.data.Screen
+import com.example.sxodimsduu.network.RetrofitInstance
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 @Composable
 fun SignUpScreen(
@@ -63,14 +58,11 @@ fun SignUpScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var isClicked by remember { mutableStateOf(false) }
-    var isLoading by remember { mutableStateOf(false) }  // Для отображения состояния загрузки
+    var isLoading by remember { mutableStateOf(false) }
 
     val onSignUpClicked = let@{
         Log.d("SignUp", "Sign Up button clicked")
-
-        // Проверяем, чтобы данные были заполнены
         if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-            // Валидация email
             if (!email.endsWith("@sdu.edu.kz")) {
                 Toast.makeText(
                     navController.context,
@@ -79,9 +71,8 @@ fun SignUpScreen(
                 ).show()
                 return@let
             }
-
-            // Валидация пароля: минимум 8 символов, хотя бы одна цифра, одна заглавная буква, один специальный символ
-            val passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}\$"
+            val passwordPattern =
+                "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}\$"
             if (!password.matches(passwordPattern.toRegex())) {
                 Toast.makeText(
                     navController.context,
@@ -90,7 +81,6 @@ fun SignUpScreen(
                 ).show()
                 return@let
             }
-
             isLoading = true
 
             val newUser = User(
@@ -98,28 +88,23 @@ fun SignUpScreen(
                 password = password,
                 name = name
             )
-
-            // Отправляем запрос на сервер с использованием Retrofit
             RetrofitInstance.api.signUp(newUser).enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     isLoading = false
                     if (response.isSuccessful) {
                         Log.d("SignUp", "Data validated, sending request...")
                     } else {
-                        // Обработка ошибок, например, неверный email или пароль
                         println("Error: ${response.message()}")
                     }
                 }
 
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     isLoading = false
-                    // Ошибка соединения или другие проблемы
                     println("Failure: ${t.message}")
                 }
             })
         } else {
             Log.d("SignUp", "Please fill in all fields")
-            // Показать сообщение о том, что поля должны быть заполнены
             println("Please fill in all fields")
         }
     }
@@ -242,7 +227,7 @@ fun SignUpScreen(
         CustomButton(
             text = "Sign Up",
             onClick = {
-                if (email.isEmpty() || password.isEmpty() || name.isEmpty()) {
+                if (email.isEmpty() && password.isEmpty() && name.isEmpty()) {
                     Toast.makeText(
                         navController.context,
                         "Please fill in all fields",
@@ -283,7 +268,7 @@ fun TermsOfServiceAgreementRow(
                 fontWeight = FontWeight.W500,
                 fontSize = 12.sp,
 
-            )
+                )
         ) {
             append("Terms and Services")
         }
