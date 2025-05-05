@@ -63,7 +63,7 @@ fun LoginScreen(navController: NavController) {
                         response: Response<LoginResponse>
                     ) {
                         Log.d("Login", "Token: ${response.body()?.token}")
-                        navController.navigate("main_screen")
+                        navController.navigate(Screen.HomeScreen)
                     }
 
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
